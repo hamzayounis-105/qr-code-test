@@ -8,11 +8,12 @@
 <body>
   <h1>QR Code Scanner</h1>
   <video id="qr-video" width="100%" height="100%" autoplay></video>
-
+<p></p>
   <script src="https://cdn.rawgit.com/sitepoint-editors/jsQR/v1.0.1/dist/jsQR.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
       const video = document.getElementById('qr-video');
+      const qr_working=document.querySelector('p');
 
       // Check if the browser supports getUserMedia
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -36,6 +37,7 @@
                 alert('QR Code detected: ' + code.data);
                 // You can perform any action with the scanned data here
                 clearInterval(qrReader);
+                qr_working.innerHTML="QR scannner"
                 track.stop();
                 video.srcObject = null;
               }
