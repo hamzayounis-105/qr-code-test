@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scan barre code</title>
+        <style>
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .wrapper {
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid yellow;
+            display: flex;
+            flex-direction: column;
+            background-color: #FFD47B;
+            align-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            height: 100%;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(to bottom, #636363 -6%, black 55%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0px;
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);        }
+
+        .header h1 {
+            padding: 0;
+            margin: 0;
+            font-weight: 500;
+            padding: 10px 0;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+        }
+
+        .accordion-section {
+            background: transparent;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+        }
+
+        .accordation_title_wrapper {
+            display: flex;
+            background: linear-gradient(to bottom, #636363 -6%, black 55%);
+            color: white;
+            align-items: center;
+        }
+
+        .hexagon {
+            width: 50px; /* Reduced hexagon size */
+            height: 28.87px; /* Corresponding height */
+            background-color: #FEC108; /* Honey color */
+            position: absolute;
+            transform: rotate(330deg); /* Rotate hexagons by 330 degrees */
+            margin-left: -11px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: '';
+            width: 0;
+            border-left: 25px solid transparent; /* Reduced border size */
+            border-right: 25px solid transparent; /* Reduced border size */
+            position: absolute;
+        }
+
+        .hexagon:before {
+            top: -14.44px; /* Adjusted top position */
+            border-bottom: 14.44px solid #FEC108; /* Honey color */
+        }
+
+        .hexagon:after {
+            bottom: -14.44px; /* Adjusted bottom position */
+            border-top: 14.44px solid #FEC108; /* Honey color */
+        }
+        input[type="checkbox" i]{
+            transform: scale(1.4);
+            margin-right: 12px;
+        }
+        #datePicker{
+            width: 95%;
+            margin-left: 6px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            padding: 6px 0px;
+        }
+        .accordion-title {
+            padding: 6px;
+            padding-right: 0px;
+            /* cursor: pointer; */
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 12px;
+            /* background-color: red; */
+        }
+
+        /* Show content when the section is active */
+        .active .accordion-content {
+            display: block;
+            width: 100%;
+            align-self: flex-end;
+        }
+        .accordion-content ul>li {
+            list-style: none;
+            background-color: #c0c0c0;
+            margin: 5px 0px;
+            text-align: center;
+            padding: 5px 0px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .buttons_div {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+            padding: 10px 10px;
+            align-items: baseline;
+            align-items: flex-end;
+            color: white;
+        }
+        .buttons_div button {
+            border-radius: 6px;
+            cursor: pointer;
+            /* width: 100px; */
+            background: linear-gradient(to bottom, #636363 -6%, black 55%);
+            color: white;
+            font-size: 19px;
+            padding: 5px 20px;
+        }
+        .button_wraper {
+            margin-top: auto; /* This will push the buttons_div to the bottom */
+            width: 100%;
+        }
+        .form_data{
+            padding-top: 20px;
+            width: 75%;
+            font-size: 22px;
+         /* background-color: red  ; */
+
+            
+        }
+        .accord_input input{
+            padding: 8px 3px;
+            border: 2px solid black;
+        }.long_late{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            width: 50%;
+        }
+        .cordonates{
+            display: flex;
+            flex-direction: row;
+            padding-top: 20px;
+            font-size: 22px;
+                width: 80%;
+            align-items: center;
+            text-align: center;
+        }
+        .long_late input{
+            padding: 8px 3px;
+     width: 85%;
+            border: 2px solid black;
+            font-size: 18px;
+            text-align: center;
+            color: black;
+        }
+      
+        </style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    </head>
+    <body>
+        <script src="./qrScript.js"></script>
+        <div class="wrapper">
+            <div class="header">
+                <h1>
+                    Scan barre code
+                </h1>
+            </div>
+            <div style="text-align: center;">
+                <div id="reader" style="width: 500px;"></div>
+                <div id="show" style="display: none;">
+                    <h4>Scanned Result</h4>
+                    <p style="color: blue;" id="result"></p>
+                </div>
+            </div>
+            <div class="cordonates ">
+                <div class="heading">or enter code :</div>
+                <div class="long_late ">
+                    <input
+                        type="text"
+                        name=""
+                        id=""
+                        placeholder="form"
+                    >
+                  
+                </div>
+                
+            </div>
+            <div class="buttons_div">
+                <button>Search</button>
+            </div>
+            <div class="button_wraper">
+                <div class="buttons_div">
+                    <button>Go Back</button>
+                    <button>Home</button>
+                </div>
+            </div>
+        </div>
+        <script>
+             const html5Qrcode = new Html5Qrcode('reader');
+        const qrCodeSuccessCallback = (decodedText, decodedResult)=>{
+            if(decodedText){
+                // document.getElementById('show').style.display = 'block';
+                // document.getElementById('result').textContent = decodedText;
+                console.log(decodedText);
+                html5Qrcode.stop();
+            }
+        }
+        const config = {fps:10, qrbox:{width:250, height:250}}
+        html5Qrcode.start({facingMode:"environment"}, config,qrCodeSuccessCallback );
+        </script>
+    </body>
+</html>
